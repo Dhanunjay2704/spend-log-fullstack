@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Use environment variable for API base URL
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://spend-log-backend.onrender.com/api' || 'http://localhost:5000/api';
 
 // Create axios instance
 export const authAPI = axios.create({

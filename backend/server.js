@@ -29,12 +29,13 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-// CORS - Update this section
+// CORS configuration
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://your-frontend-app.vercel.app' // Will update after deployment
-  ],
+    'https://spend-log-frontend.onrender.com',
+    process.env.CORS_ORIGIN // This will use the environment variable
+  ].filter(Boolean), // Remove any undefined values
   credentials: true
 }));
 
