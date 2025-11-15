@@ -29,13 +29,13 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-// CORS configuration
+// CORS - Updated for your frontend URL
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://spend-log-frontend.onrender.com',
-    process.env.CORS_ORIGIN // This will use the environment variable
-  ].filter(Boolean), // Remove any undefined values
+    'https://spend-log-frontend-j2po.onrender.com',
+    process.env.CORS_ORIGIN
+  ].filter(Boolean),
   credentials: true
 }));
 
@@ -58,7 +58,7 @@ app.get('/', (req, res) => {
   });
 });
 
-// Health check route (important for deployment)
+// Health check route
 app.get('/health', (req, res) => {
   res.status(200).json({
     success: true,
@@ -77,15 +77,15 @@ app.use('*', (req, res) => {
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  console.error('Error:', err.message);
   res.status(500).json({
     success: false,
     message: 'Something went wrong!',
-    error: process.env.NODE_ENV === 'production' ? {} : err.stack
+    error: process.env.NODE_ENV === 'production' ? {} : err.message
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 
 app.listen(PORT, () => {
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
